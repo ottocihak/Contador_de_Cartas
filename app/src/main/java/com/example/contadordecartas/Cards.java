@@ -1,6 +1,6 @@
 package com.example.contadordecartas;
 
-public class Carts {
+public class Cards {
     String name;
     int manaCost;
     String layout;
@@ -72,5 +72,19 @@ public class Carts {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Cards{" +
+                "name='" + name + '\'' +
+                ", manaCost=" + manaCost +
+                ", layout='" + layout + '\'' +
+                ", type='" + type + '\'' +
+                ", ratity='" + ratity + '\'' +
+                ", power=" + power +
+                ", toughness=" + toughness +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
     }
 }
