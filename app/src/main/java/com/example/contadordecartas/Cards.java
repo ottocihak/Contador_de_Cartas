@@ -2,7 +2,7 @@ package com.example.contadordecartas;
 
 public class Cards {
     String name;
-    int manaCost;
+    double manaCost;
     String layout;
     String type;
     String ratity;
@@ -18,11 +18,11 @@ public class Cards {
         this.name = name;
     }
 
-    public int getManaCost() {
+    public double getManaCost() {
         return manaCost;
     }
 
-    public void setManaCost(int manaCost) {
+    public void setManaCost(double manaCost) {
         this.manaCost = manaCost;
     }
 

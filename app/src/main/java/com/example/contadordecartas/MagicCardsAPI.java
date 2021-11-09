@@ -37,18 +37,23 @@ public class MagicCardsAPI {
         try {
             JSONObject data = new JSONObject(jsonResponse);
             JSONArray jsonCards = data.getJSONArray("cards");
+
+            Log.d("DEBUG",""+jsonCards.length());
+
             for (int i = 0; i < jsonCards.length(); i++) {
                 JSONObject jsonCard = jsonCards.getJSONObject(i);
 
                 Cards card = new Cards();
-                card.setName(jsonCard.getString("name"));
-                card.setManaCost(jsonCard.getInt("cmc"));
-                card.setLayout(jsonCard.getString("layout"));
-                card.setType(jsonCard.getString("type"));
-                card.setRatity(jsonCard.getString("rarity"));
-                card.setPower(jsonCard.getInt("power"));
-                card.setToughness(jsonCard.getInt("toughness"));
+                card.setName(jsonCard.has("name")?jsonCard.getString("name"):"Desconocido");
+                card.setManaCost(jsonCard.has("cmc")?jsonCard.getDouble("cmc"):0);
+                card.setLayout(jsonCard.has("layout")?jsonCard.getString("layout"):"Desconocido");
+                card.setType(jsonCard.has("type")?jsonCard.getString("type"):"Desconocido");
+                card.setRatity(jsonCard.has("rarity")?jsonCard.getString("rarity"):"Desconocido");
+                card.setPower(jsonCard.has("power")?jsonCard.getInt("power"):0);
+                card.setToughness(jsonCard.has("toughness")?jsonCard.getInt("toughness"):0);
+                card.setImageUrl(jsonCard.has("imageUrl")?jsonCard.getString("imageUrl"):"Desconocido");
 
+                Log.d("DEBUG",""+i);
 
                 cards.add(card);
             }
