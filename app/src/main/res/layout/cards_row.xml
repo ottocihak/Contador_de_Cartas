@@ -1,5 +1,53 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent">
-    <ImageView android:id="@+id/cardPic" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_marginLeft="10dp" android:layout_marginEnd="10dp" android:layout_marginRight="10dp" android:adjustViewBounds="true" android:maxHeight="70dp" android:maxWidth="35dp" android:scaleType="fitXY" android:textAppearance="@style/TextAppearance.AppCompat.Title" app:layout_constraintBottom_toBottomOf="@+id/cardTitle" app:layout_constraintEnd_toStartOf="@+id/rarity" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/cardTitle"/>
-    <TextView android:id="@+id/cardTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:hint="The Dark Knight" android:textStyle="bold" app:layout_constraintBottom_toTopOf="@+id/rarity" app:layout_constraintStart_toStartOf="@+id/rarity" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_chainStyle="packed"/>
-    <TextView android:id="@+id/rarity" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="272dp" android:layout_marginRight="272dp" android:hint="91%" android:textAppearance="@style/TextAppearance.AppCompat.Body1" android:textSize="12sp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/cardPic" app:layout_constraintTop_toBottomOf="@+id/cardTitle"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/cardPic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxWidth="25dp"
+            android:maxHeight="125dp"
+            android:scaleType="fitXY"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintBottom_toBottomOf="@+id/cardTitle"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardTitle" />
+
+        <TextView
+            android:id="@+id/cardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/rarity"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/rarity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/cardTitle" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="95dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

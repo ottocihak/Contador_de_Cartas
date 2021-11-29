@@ -1,6 +1,14 @@
 package com.example.contadordecartas;
 
-public class Cards {
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import java.io.Serializable;
+
+@Entity
+public class Cards implements Serializable {
+    @PrimaryKey(autoGenerate = true)
+    int id;
     String name;
     double manaCost;
     String layout;
@@ -9,6 +17,10 @@ public class Cards {
     int power;
     int toughness;
     String imageUrl;
+
+    public int getId() {return id;}
+
+    public void setId(int id) { this.id=id; }
 
     public String getName() {
         return name;

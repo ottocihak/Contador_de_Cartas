@@ -1,6 +1,8 @@
 package com.example.contadordecartas;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,8 +20,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import com.example.contadordecartas.databinding.FragmentFirstBinding;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +30,9 @@ import java.util.List;
 public class FirstFragment extends Fragment {
     private ListView cardsMagic;
     private CardsAdapter adapter;
+    private CardsViewModel model;
+    private SharedViewModel sharedViewModel;
+    private SharedPreferences preferences;
 
     @Override
     public View onCreateView(
@@ -47,9 +52,35 @@ public class FirstFragment extends Fragment {
                 items
         );
 
+        sharedViewModel = ViewModelProviders.of(getActivity()).get(
+                SharedViewModel.class
+        );
+
         cardsMagic.setAdapter(adapter);
+
+        cardsMagic.setOnItemClickListener((adapter, fragment, i, l) -> {
+            Cards card = (Cards) adapter.getItemAtPosition(i);
+            if (!isTablet()) {
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("card", card);
+                startActivity(intent);
+            } else {
+                sharedViewModel.select(card);
+            }
+        });
+
+        model = ViewModelProviders.of(this).get(CardsViewModel.class);
+        model.getCards().observe(getViewLifecycleOwner(), cards -> {
+            adapter.clear();
+            adapter.addAll(cards);
+        });
+
         return view;
 
+    }
+
+    boolean isTablet() {
+        return getResources().getBoolean(R.bool.tablet);
     }
 
     @Override
@@ -99,8 +130,7 @@ public class FirstFragment extends Fragment {
 
 
     private void refresh() {
-        RefreshDataTask task = new RefreshDataTask();
-        task.execute();
+        model.reload();
     }
 
 }

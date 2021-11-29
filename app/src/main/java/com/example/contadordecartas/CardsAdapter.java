@@ -1,13 +1,13 @@
 package com.example.contadordecartas;
 
+import com.example.contadordecartas.databinding.CardsRowBinding;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 
@@ -22,24 +22,23 @@ public class CardsAdapter extends ArrayAdapter<Cards> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         Cards cards = getItem(position);
-        Log.w("XXXX", cards.toString());
+
+        CardsRowBinding binding = null;
 
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.cards_row, parent, false);
+            binding = DataBindingUtil.inflate(inflater, R.layout.cards_row,parent,false);
+        } else {
+            binding = DataBindingUtil.getBinding(convertView);
         }
 
-        TextView cardTitle = convertView.findViewById(R.id.cardTitle);
-        TextView rarity = convertView.findViewById(R.id.rarity);
-        ImageView cardPic = convertView.findViewById(R.id.cardPic);
-
-        cardTitle.setText(cards.getName());
-        rarity.setText(cards.getRatity());
+        binding.cardTitle.setText(cards.getName());
+        binding.rarity.setText(cards.getRatity());
 
         Glide.with(getContext())
                 .load(cards.getImageUrl())
-                .into(cardPic);
+                .into(binding.cardPic);
 
-        return convertView;
+        return binding.getRoot();
     }
 }
