@@ -1,5 +1,7 @@
 package com.example.contadordecartas;
 
+import com.example.contadordecartas.databinding.FragmentFirstBinding;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,10 +14,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +31,7 @@ public class FirstFragment extends Fragment {
     private ListView cardsMagic;
     private CardsAdapter adapter;
     private CardsViewModel model;
+    private FragmentFirstBinding binding;
     private SharedViewModel sharedViewModel;
     private SharedPreferences preferences;
 
@@ -40,7 +41,8 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        View view = inflater.inflate(R.layout.fragment_first, container, false);
+        binding = FragmentFirstBinding.inflate(inflater);
+        View view = binding.getRoot();
 
         cardsMagic = view.findViewById(R.id.cardMagic);
 
@@ -56,16 +58,16 @@ public class FirstFragment extends Fragment {
                 SharedViewModel.class
         );
 
-        cardsMagic.setAdapter(adapter);
+        binding.cardMagic.setAdapter(adapter);
 
-        cardsMagic.setOnItemClickListener((adapter, fragment, i, l) -> {
-            Cards card = (Cards) adapter.getItemAtPosition(i);
+        binding.cardMagic.setOnItemClickListener((adapterView, view1, i, l) -> {
+            Cards cards = (Cards) adapterView.getItemAtPosition(i);
             if (!isTablet()) {
                 Intent intent = new Intent(getContext(), DetailsActivity.class);
-                intent.putExtra("card", card);
+                intent.putExtra("card", cards);
                 startActivity(intent);
             } else {
-                sharedViewModel.select(card);
+                sharedViewModel.select(cards);
             }
         });
 

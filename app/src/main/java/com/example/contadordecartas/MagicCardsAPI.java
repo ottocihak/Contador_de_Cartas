@@ -49,8 +49,13 @@ public class MagicCardsAPI {
                 card.setLayout(jsonCard.has("layout")?jsonCard.getString("layout"):"Desconocido");
                 card.setType(jsonCard.has("type")?jsonCard.getString("type"):"Desconocido");
                 card.setRatity(jsonCard.has("rarity")?jsonCard.getString("rarity"):"Desconocido");
-                card.setPower(jsonCard.has("power")?jsonCard.getInt("power"):0);
-                card.setToughness(jsonCard.has("toughness")?jsonCard.getInt("toughness"):0);
+                try {
+                    card.setPower(jsonCard.has("power")? jsonCard.getInt("power"):0);
+                    card.setToughness(jsonCard.has("toughness")?jsonCard.getInt("toughness"):0);
+                } catch (Exception e) {
+                    card.setPower(0);
+                    card.setToughness(0);
+                }
                 card.setImageUrl(jsonCard.has("imageUrl")?jsonCard.getString("imageUrl"):"Desconocido");
 
                 Log.d("DEBUG",""+i);
